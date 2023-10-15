@@ -1,6 +1,5 @@
 let boat
-//let osphone = false;
-//let androidphone = false;
+let permissionGranted = false;
 let x, y,z, xx, zz
 let bsz
 let yarr = []
@@ -21,17 +20,41 @@ function setup() {
   sz =width/200
   imageMode(CENTER)
   // added code for os phones
-  // if (typeof DeviceMotionEvent.requestPermission === 'function') {
-  //   DeviceMotionEvent.requestPermission()
-  //     .then(permissionState => {
-  //       if (permissionState === 'granted') {
-  //         osphone=true;
-  //       }
-  //     })
-  //     .catch(console.error);
-  // } else {
-  //   androidphone = true;
-  // }
+  if(typeof(DeviceOrientationEvent) !== 'undefined' && typeof (DeviceOrientationEvent.requestPermission) === 'function'){
+    // ios 13 device
+    DeviceOrientationEvent.requestPermission()
+    .catch(() => {
+      // show permissionn dialog only the first time
+      let button = createButton("click to allow access to sensors");
+      button.style("font-size", "24px");
+      button.center();
+      button.mousePressed(requestAccess);
+      throw error;
+    })
+    .then(()=>{
+     // on any subsequent visit
+     permissionGranted = true;
+    })
+  } else{
+    // non ios devise
+    // grant access anyway
+    console.log("went through the permessions checkcheck")
+    permissionGranted = true;
+  }
+}
+
+function requestAccess(){
+  DeviceOrientationEvent.requestPermission()
+    .then(response =>{
+      if (response == 'granted'){
+        permissionGranted = true;
+      } else{
+        permissionGranted = false;
+      }
+    })
+    .catch(console.error)
+    // remove the button
+    this.remove()
 }
 
 function draw() {
