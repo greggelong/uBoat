@@ -16,6 +16,7 @@ function preload(){
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  pixelDensity(1);
   angleMode(DEGREES)
   bsz = windowWidth/2
   boat.resize(bsz,0)
