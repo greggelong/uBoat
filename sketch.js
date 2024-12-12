@@ -10,7 +10,7 @@ let sky
 
 
 function preload(){
-  boat = loadImage("oboats.png")
+  boat = loadImage("metalboat1.png")
   sky = loadImage("sky.png")
 }
 
@@ -63,7 +63,8 @@ function requestAccess(){
 }
 
 function draw() {
-  background(150,150,255);
+  //background(150,150,255);
+  background(0)
   // y sky
   fill(0,0,130)
   push()
@@ -83,8 +84,8 @@ function draw() {
     yarr.pop()
     
   }
-  stroke(255,255,0)
-  strokeWeight(5)
+  stroke(255,0,0)
+  strokeWeight(8)
   noFill();
 // y line
   beginShape()
@@ -94,7 +95,7 @@ function draw() {
   }
   endShape()
   // xline
-  stroke(0,0,255)
+  stroke(255,255,0)
   beginShape()
 
   for (let i =0; i<xarr.length; i++){
@@ -108,7 +109,7 @@ function draw() {
   endShape()
   // z line
   beginShape()
-  stroke(0)
+  stroke(0,255,0)
   for (let i =0; i<zarr.length; i++){
     //ellipse(i*sz,height/4+yarr[i],30,30 )
     vertex(i*sz,height/1.2+zarr[i])
