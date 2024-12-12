@@ -6,16 +6,20 @@ let yarr = []
 let xarr =[]
 let zarr =[]
 let sz
+let sky
 
 
 function preload(){
   boat = loadImage("oboats.png")
+  sky = loadImage("sky.png")
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  angleMode(DEGREES)
   bsz = windowWidth/2
   boat.resize(bsz,0)
+  sky.resize(windowHeight,0)
   x=0
   sz =width/200
   imageMode(CENTER)
@@ -58,10 +62,16 @@ function requestAccess(){
 }
 
 function draw() {
-  background(127);
+  background(150,150,255);
   // y sky
   fill(0,0,130)
-  angleMode(DEGREES)
+  push()
+  translate(width/2,height/2)
+  rotate((frameCount/5)%360)
+  image(sky,0,0)
+  pop()
+
+  
   xx =accelerationX*10
   zz =accelerationZ*10
   y = accelerationY*10;
@@ -117,6 +127,7 @@ function draw() {
   rotate(x)
   image(boat,0,0);
   pop()
+  
   
   
 }
